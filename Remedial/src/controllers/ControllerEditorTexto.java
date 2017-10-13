@@ -99,6 +99,7 @@ public class ControllerEditorTexto {
             if(jfc.showSaveDialog(this.view_editor)==jfc.APPROVE_OPTION){
                 model_editor.setArchivo(jfc.getSelectedFile());
                 model_editor.setRuta(jfc.getSelectedFile().getAbsolutePath());
+                jb_guardar();
           
             }
         } catch (Exception e) {//por alguna excepcion salta un mensaje de error
