@@ -13,16 +13,16 @@ import java.io.File;
  */
 public class ModelEditorTexto {
 
-    private File archivo;
-    private String nombre;
+    private File archivo ;
+    private String ruta;
     
-    public String getNombre() {
-        return nombre;
+    public String getRuta() {
+        return ruta;
     }
 
   
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setRuta(String ruta) {
+        this.ruta = ruta;
     }
 
    

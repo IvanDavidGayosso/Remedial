@@ -18,12 +18,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import views.ViewEditorTexto;
 import models.ModelEditorTexto;
 
 public class ControllerEditorTexto {
 
-    File archivo_nuevo;
+   
     FileReader fr = null;
     FileWriter fw = null;
     JFileChooser jfc = new JFileChooser();
@@ -32,7 +33,7 @@ public class ControllerEditorTexto {
 
     public ControllerEditorTexto(ModelEditorTexto model_editor, Object[] views) {
         this.model_editor = model_editor;
-        this.view_editor = ( ViewEditorTexto) views[4];
+        this.view_editor = (ViewEditorTexto) views[4];
         initView();
         this.view_editor.jb_abrir.addActionListener(e -> jb_abrir());
         this.view_editor.jb_guardar.addActionListener(e -> jb_guardar());
@@ -91,14 +92,17 @@ public class ControllerEditorTexto {
     }
 
     private void jb_nuevo() {
-        try {
-            model_editor.setNombre(JOptionPane.showInputDialog(view_editor, "Nombre del archivo"));
-            archivo_nuevo = new File("C:\\Users\\Ivan David\\Desktop\\archivos\\" + model_editor.getNombre() + ".ivan");
-            archivo_nuevo.createNewFile();
-            view_editor.jta_file.setText(" ");
-            model_editor.setArchivo(archivo_nuevo);
-        } catch (IOException ex) {
-            Logger.getLogger(ControllerEditorTexto.class.getName()).log(Level.SEVERE, null, ex);
+        
+            view_editor.jta_file.setText("");
+            
+            try {
+            if(jfc.showSaveDialog(this.view_editor)==jfc.APPROVE_OPTION){
+                model_editor.setArchivo(jfc.getSelectedFile());
+                model_editor.setRuta(jfc.getSelectedFile().getAbsolutePath());
+          
+            }
+        } catch (Exception e) {//por alguna excepcion salta un mensaje de error
+            JOptionPane.showMessageDialog(null, "Error al guardar el archivo!", "Oops! Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
